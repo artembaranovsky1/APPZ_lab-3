@@ -5,6 +5,6 @@ export class UserEntity {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column("text")
+    @Column("varchar", { length: 100 })
     username!: string;
 }

@@ -10,4 +10,6 @@ export interface IAdService {
 
     searchAdsByCategoryName(categoryName: string): Promise<AdDTO[]>;
     searchAdsByTagName(tagName: string): Promise<AdDTO[]>;
+
+    searchAds(query: string): Promise<AdDTO[]>;
 }

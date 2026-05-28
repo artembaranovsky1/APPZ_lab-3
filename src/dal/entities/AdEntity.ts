@@ -5,10 +5,10 @@ export class AdEntity {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column("text")
+    @Column("varchar", { length: 100 })
     title!: string;
 
-    @Column("text")
+    @Column("varchar", { length: 100 })
     content!: string;
 
     @Column("real")
@@ -17,7 +17,7 @@ export class AdEntity {
     @Column("int")
     authorId!: number;
 
-    @Column("text")
+    @Column("varchar", { length: 100 })
     categoryName!: string;
 
     @Column("simple-array")

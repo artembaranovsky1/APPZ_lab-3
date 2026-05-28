@@ -2,6 +2,6 @@ import { Entity, PrimaryColumn } from "typeorm";
 
 @Entity("Categories")
 export class CategoryEntity {
-    @PrimaryColumn("text")
+    @PrimaryColumn("varchar", { length: 100 })
     name!: string;
 }

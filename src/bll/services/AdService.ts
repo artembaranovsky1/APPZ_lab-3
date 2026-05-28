@@ -1,3 +1,4 @@
+import { injectable, inject } from "tsyringe";
 import { IAdService } from '../interfaces/IAdService';
 import { IUnitOfWork } from '../../dal/uow/IUnitOfWork';
 import { AdMapper } from '../mapping/AdMapper';
@@ -5,8 +6,9 @@ import { AdDTO } from '../dto/AdDTO';
 import { CreateAdDTO } from '../dto/CreateAdDTO';
 import { AdEntity } from '../../dal/entities/AdEntity';
 
+@injectable()
 export class AdService implements IAdService {
-    constructor(private readonly uow: IUnitOfWork) {}
+    constructor(@inject("IUnitOfWork") private readonly uow: IUnitOfWork) {}
 
     public async createAd(dto: CreateAdDTO): Promise<AdDTO> {
         let categoryName = dto.categoryName.trim() || "Різне";
@@ -81,6 +83,23 @@ export class AdService implements IAdService {
         const filteredAds = ads.filter(ad =>
             ad.tagNames && ad.tagNames.some(t => t.toLowerCase() === targetTag)
         );
+        return filteredAds.map(ad => AdMapper.toDTO(ad, users));
+    }
+
+
+    public async searchAds(query: string): Promise<AdDTO[]> {
+        const ads = await this.uow.ads.getAll();
+        const users = await this.uow.users.getAll();
+        const lowerQuery = query.toLowerCase().trim();
+
+        const filteredAds = ads.filter(ad => {
+            const matchTitle = ad.title.toLowerCase().includes(lowerQuery);
+
+            const matchTags = ad.tagNames && ad.tagNames.some(t => t.toLowerCase().includes(lowerQuery));
+
+            return matchTitle || matchTags;
+        });
+
         return filteredAds.map(ad => AdMapper.toDTO(ad, users));
     }
 }

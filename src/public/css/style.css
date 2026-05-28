@@ -1,0 +1,42 @@
+body {
+    background-color: #f4f6f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+}
+
+.ad-card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.ad-card:hover {
+    transform: translateY(-3px);
+}
+
+.price-badge {
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.4em 0.8em;
+}
+
+.login-page {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
